@@ -8,7 +8,23 @@ const db = new sqlite3.Database('cloudComparison.db')
 
 app.use(cors())
 
-app.get('/api/category/:id', (req,res)=>{
+app.get('/api/subcategories', (req,res)=>{
+      db.all(`select
+                  T1.name,
+                  subCategoryId,
+                  categoryId,
+                  T2.name as 'categoryName'
+               from subCategories T1
+                  left join categories T2 on T1.category = T2.categoryId
+               order by categoryId;`, [], (err, rows) => {
+         if (err) return console.log(err)
+         res.json(
+            rows
+         )
+      })
+})
+
+app.get('/api/subcategory/:id', (req,res)=>{
    const {id} = req.params
       db.all(`select
                   T1.name,
@@ -39,7 +55,7 @@ app.get('/api/services', (req,res)=>{
             order by T1.provider;`, [], (err, rows) => {
          if (err) return console.log(err)
          res.json(
-            rows   
+            rows
          )
       })
 })
@@ -60,7 +76,7 @@ app.get('/api/services/:id', (req,res)=>{
          order by T1.provider;`, [id], (err, rows) => {
       if (err) return console.log(err)
       res.json(
-         rows   
+         rows
       )
    })
 })
