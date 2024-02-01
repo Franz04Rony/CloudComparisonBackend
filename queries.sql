@@ -86,6 +86,30 @@ VALUES
   (null, 'Firestore', 'https://cloud.google.com/firestore', 6, 3, "Es la base de datos de documentos de nivel empresarial recomendada y compatible con JSON, en la que confían más de 250,000 desarrolladores. Es adecuada para aplicaciones con modelos de datos enriquecidos que requieren capacidad de consulta, escalabilidad y alta disponibilidad. También ofrece sincronización de clientes de baja latencia y acceso a los datos sin conexión."),
   (null, 'Amazon Neptune', 'https://aws.amazon.com/es/neptune/', 8, 1, "Análisis de grafos de alto rendimiento y base de datos sin servidor para una escalabilidad y disponibilidad superiores. gratuita durante 750 horas por 30 días con el nivel gratuito de AWS en instancias t3.medium o t4g.medium.");
 
+-- agregar una nueva categoría
+  INSERT INTO categories
+  (categoryId, name, description)
+  VALUES
+  (null, 'Computing', 'Los proveedores de nubes tienen servicios que permiten al usuario utilizar su hardware para realizar operaciones computacionales, almacenamiento, creación de una VM, etc.');
+
+-- agregar subcategorías a computing
+  INSERT INTO subCategories
+  (subCategoryId, name, category)
+  VALUES
+  (null, 'Máquinas virtuales (VM)', 4),
+  (null, 'Serverless computing', 4);
+
+-- agregar más servicios
+  INSERT INTO services
+  (serviceId, name, link, subCategory, provider, description)
+  VALUES
+  (null, 'EC2','https://aws.amazon.com/es/ec2/', 9, 1, 'Amazon Elastic Compute Cloud (Amazon EC2) ofrece la plataforma de computación más amplia y completa, con más de 750 instancias y la posibilidad de elegir el procesador, almacenamiento, redes, sistema operativo y modelo de compra más reciente, en función de lo que mejor se ajuste a las necesidades que plantea su carga de trabajo.'),
+  (null, 'Azure Virtual Machines', 'https://azure.microsoft.com/en-us/products/virtual-machines/', 9, 2, 'es un servicio de Azure que permite crear y administrar máquinas virtuales (VM) en la nube, con diversas opciones de sistemas operativos, rendimiento, escalabilidad, seguridad y ahorro de costos'),
+  (null, 'Google Compute Engine', 'https://cloud.google.com/compute', 9, 3, 'GCE ofrece la opción de precios de spot más asequible con las máquinas virtuales de spot. Esto ofrece la misma potencia escalable que una instancia normal de Compute Engine, excepto con contratos de uso indulgente para trabajos por lotes a una fracción de los costos típicos. Cabe señalar que tanto Azure como EC2 tienen opciones similares, aunque no con el ahorro del 91 % que afirma GCE.'),
+  (null, 'AWS Lambda', 'https://aws.amazon.com/es/lambda/', 10, 1, 'AWS Lambda es un servicio informático serverless y basado en eventos que le permite ejecutar código para prácticamente cualquier tipo de aplicación o servicio backend sin necesidad de aprovisionar servidores. Se despliega en servidores que ejecutan Amazon Linux. Las funciones de Lambda pueden interactuar con otros servicios en la nube de AWS o en otros lugares de numerosas maneras, como servicios de correo, etc.'),
+  (null, 'Azure Functions', 'https://azure.microsoft.com/en-ca/products/functions/', 10, 2, 'Comparado con AWS Lambda y Google Cloud Functions, Azure Functions es más flexible y complejo en cuanto a cómo los usuarios implementan funciones sin servidor como parte de una carga de trabajo más grande, ya que puede ser corrido dentro del entorno de Azure Functions o dentro de contenedores Docker. También se puede especificar el OS, entre Windoes o alguna distribución de Linux.'),
+  (null, 'Google Cloud Functions', 'https://cloud.google.com/functions', 10, 3, 'Servicio serverless que permite ejecutar código sin aprovisionamiento de servidores. Requiere que las funciones se almacenen en el Registro de Contenedores de Google utilizando imágenes de contenedores. Es decir, que a diferencia de Lambda o Azure Functions, en Google Cloud Functions las funciones deben ejecutarse como contenedores.');
+
 -- subcategorías por categoría, filtrado por categoría
 select
     T1.name,
